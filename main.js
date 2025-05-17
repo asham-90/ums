@@ -72,7 +72,12 @@ async function getUsers (){
 
     }catch(e){
 
-        document.querySelector(".text-danger").textContent("error pleaas try again ........")
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: '<a href="#">Why do I have this issue?</a>'
+          });
         document.querySelector(".loader-container").classList.add("d-none")
 
     }}
@@ -84,6 +89,25 @@ getUsers();
 getUsers();
 
 async function deleteUser(id) {
-  const response = await axios.delete(`https://node-react-10.onrender.com/users/${id}`);
-  location.reload();
+
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then( async(result) => {
+    if (result.isConfirmed) {
+      const response = await axios.delete(`https://node-react-10.onrender.com/users/${id}`);
+    
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+      });
+    }
+  });
+location.reload
 }

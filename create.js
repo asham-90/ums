@@ -37,9 +37,12 @@ addUserForm.onsubmit = async function (e) {
    
 }catch(e){
 
-    document.querySelector(".loader-container").classList.add("d-none")
-
-    document.querySelector(".text-danger").textContent("error pleaas try again ........")
+    Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
 
 }}
 
